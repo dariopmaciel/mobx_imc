@@ -7,6 +7,16 @@ class ContadorController {
   //para se disponibilizar para a paagina
   var _counter = Observable<int>(0);
 
+  late Action increment;
+  ContadorController() {
+    increment = Action(_incrementeCounter);
+  }
+
   //criado o metodo get para se extrair '_counter.value' de uma forma mais facil de usar
   int get counter => _counter.value;
+
+  //crial o metodo
+  void _incrementeCounter() {
+    _counter.value++;
+  }
 }
