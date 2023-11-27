@@ -29,6 +29,7 @@ class ContadorPage extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        //onPressed: ()=> controller.incrementX(),
         onPressed: () => controller.increment(),
         tooltip: 'Increment',
         child: const Icon(Icons.add),
