@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx_imc/contador/contador_controller.dart';
 
 class ContadorPage extends StatelessWidget {
@@ -18,15 +19,17 @@ class ContadorPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const Text('Você pressionou o botão esta quandidade de vezes:'),
-            Text(
-              '${controller.counter}',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
+            Observer(builder: (BuildContext context) {
+              return Text(
+                '${controller.counter}',
+                style: Theme.of(context).textTheme.headlineMedium,
+              );
+            }),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => controller.increment,
+        onPressed: () => controller.increment(),
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),
