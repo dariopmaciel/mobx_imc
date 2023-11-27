@@ -19,17 +19,27 @@ class ContadorPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const Text('Você pressionou o botão esta quandidade de vezes:'),
-            Observer(builder: (BuildContext context) {
-              return Text(
-                '${controller.counter}',
-                style: Theme.of(context).textTheme.headlineMedium,
-              );
+            Observer(
+              builder: (BuildContext context) {
+                return Text(
+                  '${controller.counter}',
+                  style: Theme.of(context).textTheme.headlineMedium,
+                );
+              },
+            ),
+            Observer(builder: (_) {
+              return Text(controller.fullName.first);
             }),
+            Observer(
+              builder: (_) {
+                return Text(controller.fullName.last);
+              },
+            ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        //onPressed: ()=> controller.incrementX(),
+        // onPressed: ()=> controller.incrementX(),
         onPressed: () => controller.increment(),
         tooltip: 'Increment',
         child: const Icon(Icons.add),
