@@ -1,5 +1,7 @@
 //para ser uma clsse mobX de geração de codigo
 
+//fu-mobx-store
+
 import 'package:mobx/mobx.dart';
 import 'package:mobx_imc/model/full_name.dart';
 part 'contador_codegen_controller.g.dart';
@@ -19,6 +21,17 @@ abstract class _ContadorCodeGenControllerBase with Store {
   @action
   void increment() {
     counter++;
+    // fullName = fullName.copyWith(first: "Dario", last: "P Maciel");
+  }
+
+  @action
+  void changeName() {
     fullName = fullName.copyWith(first: "Dario", last: "P Maciel");
+  }
+
+  @action
+  void rollBackName() {
+    fullName = fullName.copyWith(first: "First", last: "last");
+    
   }
 }
