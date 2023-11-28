@@ -34,7 +34,7 @@ class ContadorPage extends StatelessWidget {
               builder: (_) => Text(controller.fullName.last),
             ),
             Observer(
-              builder: (BuildContext context) {
+              builder: (_) {
                 return Text(controller.saudacao);
               },
             )
