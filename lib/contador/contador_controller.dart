@@ -13,13 +13,21 @@ class ContadorController {
 
 //action do mobX
   late Action increment;
+  late Computed _saudacaoComputed;
+
   ContadorController() {
     increment = Action(_incrementeCounter);
+    _saudacaoComputed = Computed(() => 'Olá ${_fullName.value.first}');
   }
 
   //criado o metodo get para se extrair '_counter.value' de uma forma mais facil de usar
   int get counter => _counter.value;
   FullName get fullName => _fullName.value;
+
+  //*Funcionar funciona mas não é o ideal
+  // String get saudacao => 'Olá ${_fullName.value.first}';
+  //*O IDEAL
+  String get saudacao => _saudacaoComputed.value;
 
   //cria o metodo
   //action do mobX
@@ -27,13 +35,17 @@ class ContadorController {
     _counter.value++;
     print("Antes");
     print(_fullName.value.hashCode);
-    // ! ESTE ABAIXO ESTA ERRADO 
+    // ! ESTE ABAIXO ESTÁ ERRADO
     // ! NÃO PODE PEGAR O OBJETO E ALTERAR OS ATRIBUTOS DELE
     // _fullName.value.first = "Dario";
     // _fullName.value.last = "P Maciel";
-    
-    // ! CORRETO 
-    _fullName.value = FullName(first: "Dario", last: "P Maciel");
+
+    // * CORRETO = > Cria se um novo 'objeto'
+    // _fullName.value = FullName(first: "Dario", last: "P Maciel");
+    //! OU
+    //* CORRETO = > Cria se um 'copy with'
+    _fullName.value = _fullName.value.copyWith(first: "Dario", last: "Maciel");
+
     print("Depois");
     print(_fullName.value.hashCode);
   }
@@ -51,4 +63,24 @@ class FullName {
     required this.first,
     required this.last,
   });
+
+  FullName copyWith({
+    String? first,
+    String? last,
+  }) {
+    return FullName(
+      first: first ?? this.first,
+      last: last ?? this.last,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is FullName && other.first == first && other.last == last;
+  }
+
+  @override
+  int get hashCode => first.hashCode ^ last.hashCode;
 }

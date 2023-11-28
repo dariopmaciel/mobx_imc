@@ -31,10 +31,13 @@ class ContadorPage extends StatelessWidget {
               return Text(controller.fullName.first);
             }),
             Observer(
-              builder: (_) {
-                return Text(controller.fullName.last);
-              },
+              builder: (_) => Text(controller.fullName.last),
             ),
+            Observer(
+              builder: (BuildContext context) {
+                return Text(controller.saudacao);
+              },
+            )
           ],
         ),
       ),
