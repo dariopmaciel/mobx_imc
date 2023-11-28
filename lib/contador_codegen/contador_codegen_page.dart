@@ -12,7 +12,7 @@ class ContadorCodegenPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text("Contador MobX"),
+        title: const Text("Contador MobX CodeGen"),
       ),
       body: Center(
         child: Column(
@@ -27,17 +27,17 @@ class ContadorCodegenPage extends StatelessWidget {
                 );
               },
             ),
-            // Observer(builder: (_) {
-            //   return Text(controller.fullName.first);
-            // }),
-            // Observer(
-            //   builder: (_) => Text(controller.fullName.last),
-            // ),
-            // Observer(
-            //   builder: (_) {
-            //     return Text(controller.saudacao);
-            //   },
-            // )
+            Observer(builder: (_) {
+              return Text(controller.fullName.first);
+            }),
+            Observer(
+              builder: (_) => Text(controller.fullName.last),
+            ),
+            Observer(
+              builder: (_) {
+                return Text(controller.saudacao);
+              },
+            )
           ],
         ),
       ),

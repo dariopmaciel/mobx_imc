@@ -1,4 +1,5 @@
 import 'package:mobx/mobx.dart';
+import 'package:mobx_imc/model/full_name.dart';
 
 class ContadorController {
   //no MOBX não se declara o valor 'int _counter'
@@ -17,7 +18,7 @@ class ContadorController {
 
   ContadorController() {
     increment = Action(_incrementeCounter);
-    _saudacaoComputed = Computed(() => 'Olá ${_fullName.value.first}');
+    _saudacaoComputed = Computed(() => 'Olá ${_fullName.value.first} ${counter}');
   }
 
   //criado o metodo get para se extrair '_counter.value' de uma forma mais facil de usar
@@ -56,31 +57,31 @@ class ContadorController {
   }
 }
 
-class FullName {
-  String first;
-  String last;
-  FullName({
-    required this.first,
-    required this.last,
-  });
+// class FullName {
+//   String first;
+//   String last;
+//   FullName({
+//     required this.first,
+//     required this.last,
+//   });
 
-  FullName copyWith({
-    String? first,
-    String? last,
-  }) {
-    return FullName(
-      first: first ?? this.first,
-      last: last ?? this.last,
-    );
-  }
+//   FullName copyWith({
+//     String? first,
+//     String? last,
+//   }) {
+//     return FullName(
+//       first: first ?? this.first,
+//       last: last ?? this.last,
+//     );
+//   }
 
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
+//   @override
+//   bool operator ==(Object other) {
+//     if (identical(this, other)) return true;
 
-    return other is FullName && other.first == first && other.last == last;
-  }
+//     return other is FullName && other.first == first && other.last == last;
+//   }
 
-  @override
-  int get hashCode => first.hashCode ^ last.hashCode;
-}
+//   @override
+//   int get hashCode => first.hashCode ^ last.hashCode;
+// }

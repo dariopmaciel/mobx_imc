@@ -1,6 +1,7 @@
 //para ser uma clsse mobX de geração de codigo
 
 import 'package:mobx/mobx.dart';
+import 'package:mobx_imc/model/full_name.dart';
 part 'contador_codegen_controller.g.dart';
 
 class ContadorCodeGenController = _ContadorCodeGenControllerBase
@@ -8,10 +9,16 @@ class ContadorCodeGenController = _ContadorCodeGenControllerBase
 
 abstract class _ContadorCodeGenControllerBase with Store {
   @observable
-  int counter = 0;
+  var counter = 0;
+  @observable
+  var fullName = FullName(first: "first", last: "last");
+
+  @computed
+  String get saudacao => 'Olá ${fullName.first} $counter';
 
   @action
   void increment() {
     counter++;
+    fullName = fullName.copyWith(first: "Dario", last: "P Maciel");
   }
 }
