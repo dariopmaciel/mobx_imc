@@ -1,7 +1,9 @@
 import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:mobx_imc/imc/imc_controller.dart';
 import 'package:mobx_imc/widgets/imc_gauge.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 
 class ImcPage extends StatefulWidget {
   const ImcPage({super.key});
@@ -11,6 +13,7 @@ class ImcPage extends StatefulWidget {
 }
 
 class _ImcPageState extends State<ImcPage> {
+  final controller = ImcController();
   final pesoEC = TextEditingController();
   final alturaEC = TextEditingController();
   final formKey = GlobalKey<FormState>();
@@ -28,7 +31,11 @@ class _ImcPageState extends State<ImcPage> {
               padding: const EdgeInsets.all(8),
               child: Column(
                 children: [
-                  ImcGauge(imc: 0),
+                  Observer(
+                    builder: (BuildContext context) {
+                      return ImcGauge(imc: controller.imc);
+                    },
+                  ),
                   const SizedBox(height: 20),
                   TextFormField(
                     controller: pesoEC,
@@ -74,9 +81,10 @@ class _ImcPageState extends State<ImcPage> {
                           locale: 'pt_BR',
                           decimalDigits: 2,
                         );
-                        // double peso = formatter.parse(pesoEC.text) as double;
-                        // double altura = formatter.parse(alturaEC.text) as double;
-                        // _calIMC(peso: peso, altura: altura);
+                        double peso = formatter.parse(pesoEC.text) as double;
+                        double altura =
+                            formatter.parse(alturaEC.text) as double;
+                        controller.calcularImc(peso: peso, altura: altura);
                       }
                     },
                     child: const Text("Calcular IMC"),

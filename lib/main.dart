@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobx_imc/contador_codegen/contador_codegen_page.dart';
+
 import 'package:mobx_imc/imc/imc_page.dart';
 
 void main() {
