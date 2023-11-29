@@ -38,6 +38,8 @@ class _ImcPageState extends State<ImcPage> {
                   ),
                   const SizedBox(height: 20),
                   TextFormField(
+                    textInputAction: TextInputAction.next,
+                    textAlign: TextAlign.center,
                     controller: pesoEC,
                     keyboardType: TextInputType.number,
                     decoration: const InputDecoration(labelText: "Peso"),
@@ -51,6 +53,21 @@ class _ImcPageState extends State<ImcPage> {
                     ],
                   ),
                   TextFormField(
+                    textInputAction: TextInputAction.done,
+                    onFieldSubmitted: (value) => validacao(),
+                    // {
+                    //   var formValid = formKey.currentState?.validate() ?? false;
+                    //   if (formValid) {
+                    //     var formatter = NumberFormat.simpleCurrency(
+                    //       locale: 'pt_BR',
+                    //       decimalDigits: 2,
+                    //     );
+                    //     double peso = formatter.parse(pesoEC.text) as double;
+                    //     double altura =
+                    //         formatter.parse(alturaEC.text) as double;
+                    //     controller.calcularImc(peso: peso, altura: altura);
+                    //   }
+                    // },
                     textAlign: TextAlign.center,
                     controller: alturaEC,
                     keyboardType: TextInputType.number,
@@ -74,19 +91,20 @@ class _ImcPageState extends State<ImcPage> {
                   ),
                   const SizedBox(height: 20),
                   ElevatedButton(
-                    onPressed: () {
-                      var formValid = formKey.currentState?.validate() ?? false;
-                      if (formValid) {
-                        var formatter = NumberFormat.simpleCurrency(
-                          locale: 'pt_BR',
-                          decimalDigits: 2,
-                        );
-                        double peso = formatter.parse(pesoEC.text) as double;
-                        double altura =
-                            formatter.parse(alturaEC.text) as double;
-                        controller.calcularImc(peso: peso, altura: altura);
-                      }
-                    },
+                    onPressed: () => validacao(),
+                    // {
+                    //   var formValid = formKey.currentState?.validate() ?? false;
+                    //   if (formValid) {
+                    //     var formatter = NumberFormat.simpleCurrency(
+                    //       locale: 'pt_BR',
+                    //       decimalDigits: 2,
+                    //     );
+                    //     double peso = formatter.parse(pesoEC.text) as double;
+                    //     double altura =
+                    //         formatter.parse(alturaEC.text) as double;
+                    //     controller.calcularImc(peso: peso, altura: altura);
+                    //   }
+                    // },
                     child: const Text("Calcular IMC"),
                   ),
                 ],
@@ -94,5 +112,18 @@ class _ImcPageState extends State<ImcPage> {
         ),
       ),
     );
+  }
+
+  void validacao() {
+    var formValid = formKey.currentState?.validate() ?? false;
+    if (formValid) {
+      var formatter = NumberFormat.simpleCurrency(
+        locale: 'pt_BR',
+        decimalDigits: 2,
+      );
+      double peso = formatter.parse(pesoEC.text) as double;
+      double altura = formatter.parse(alturaEC.text) as double;
+      controller.calcularImc(peso: peso, altura: altura);
+    }
   }
 }
