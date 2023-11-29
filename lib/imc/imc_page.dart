@@ -18,6 +18,7 @@ class _ImcPageState extends State<ImcPage> {
   final pesoEC = TextEditingController();
   final alturaEC = TextEditingController();
   final formKey = GlobalKey<FormState>();
+  //*DAQUI
   final reactionDisposer = <ReactionDisposer>[];
 
   @override
@@ -42,6 +43,7 @@ class _ImcPageState extends State<ImcPage> {
     reactionDisposer.forEach((error) => error);
   }
 
+//* ATÉ AQUI
   @override
   Widget build(BuildContext context) {
     return Scaffold(
