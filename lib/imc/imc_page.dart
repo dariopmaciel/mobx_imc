@@ -1,6 +1,7 @@
 import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:mobx/mobx.dart';
 import 'package:mobx_imc/imc/imc_controller.dart';
 import 'package:mobx_imc/widgets/imc_gauge.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -17,6 +18,29 @@ class _ImcPageState extends State<ImcPage> {
   final pesoEC = TextEditingController();
   final alturaEC = TextEditingController();
   final formKey = GlobalKey<FormState>();
+  final reactionDisposer = <ReactionDisposer>[];
+
+  @override
+  void initState() {
+    super.initState();
+    final reactionErrorDisposer =
+        reaction<bool>((_) => controller.hasError, (hasError) {
+      if (hasError) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(controller.error ?? "ERROR!!!"),
+          ),
+        );
+      }
+    });
+    reactionDisposer.add(reactionErrorDisposer);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    reactionDisposer.forEach((error) => error);
+  }
 
   @override
   Widget build(BuildContext context) {
