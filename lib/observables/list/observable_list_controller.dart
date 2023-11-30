@@ -6,12 +6,13 @@ class ObservableListController = ObservableListControllerBase
     with _$ObservableListController;
 
 abstract class ObservableListControllerBase with Store {
+  
   @observable
   // var products = <ProductModel>[];
   //*Com isto se observa dentro da lista e seus itens que são alterados
-  ObservableList products = ObservableList();
-  //*ou usar assim mbas as maneiras estão corretas
-  // var products = <ProductModel>[].asObservable();
+  // ObservableList products = ObservableList();
+  //*ou usar assim! ambas as maneiras estão corretas
+  var products = <ProductModel>[].asObservable();
 
   @action
   void loadProducts() {
