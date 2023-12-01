@@ -26,7 +26,7 @@ class ModeloObservableListPage extends StatelessWidget {
                   //* Para que funcione PRECISA estar encapsuladoi por um 'Observer' e em um action no controller
                   return Observer(
                     builder: (_) {
-                      print("ITEM INTERNOOOOOOOOOOOOOOOO");
+                      print("ITEM INTERNOOOOOOOOOOOOOOOO ${productStore.product.name}");
                       return CheckboxListTile(
                         value: productStore.selected,
                         // value: false,
